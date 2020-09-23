@@ -1,0 +1,128 @@
+// Generated .IDL file (by the OLE/COM Object Viewer)
+// 
+// typelib filename: CodeHelpDef.dll
+
+[
+  uuid(56A386D8-9525-4D57-854D-12FCFB26509D),
+  version(1.1),
+  helpstring(" CodeHelp Interface Definitions"),
+  custom(50867B00-BB69-11D0-A8FF-00A0C9110059, 9782)
+]
+library CodeHelpDef
+{
+    // TLib :     // TLib : Microsoft Visual Basic 6.0 Extensibility : {EF404E00-EDA6-101A-8DAF-00DD010F7EBB}
+    importlib("VB6EXT.OLB");
+    // TLib : OLE Automation : {00020430-0000-0000-C000-000000000046}
+    importlib("stdole2.tlb");
+
+	//enums extracted from Microsoft Add-In Designer
+    typedef [uuid(289E9AF1-4973-11D1-AE81-00A0C90F26F4)]
+    enum {
+	ext_cm_AfterStartup = 0,
+	ext_cm_Startup = 1,
+	ext_cm_External = 2,
+	ext_cm_CommandLine = 3
+    } ext_ConnectMode;
+
+    typedef [uuid(289E9AF2-4973-11D1-AE81-00A0C90F26F4)]
+    enum {
+        ext_dm_HostShutdown = 0,
+        ext_dm_UserClosed = 1
+    } ext_DisconnectMode;
+
+    // Forward declare all types defined in this typelib
+    interface ICHCore;
+    interface ICHPlugin;
+
+    [
+      odl,
+      uuid(333CB209-F34A-4BBD-9331-87D8FC26691E),
+      version(1.0),
+      dual,
+      nonextensible,
+      oleautomation,
+      helpstring("CodeHelp Parent Object")
+    ]
+    interface ICHCore : IDispatch {
+        [id(0x68030000), propget]
+        HRESULT VBE([out, retval] VBE** );
+        [id(0x60030001)]
+        HRESULT AddToCodeHelpMenu(
+                        [in] BSTR Caption, 
+                        //[in, optional, defaultvalue(<unprintable IDispatch*>)] Picture* iconBitmap, 
+                        [in, optional] Variant iconBitmap, 
+                        [out, retval] IDispatch**);//[out, retval] CommandBarControl** );
+        [id(0x68030002), propget]
+        HRESULT AddInInst([out, retval] IDispatch** );
+
+    };
+
+
+    [
+      odl,
+      uuid(0412CF22-0411-4255-9EE1-57354438E4EB),
+      version(1.1),
+      dual,
+      nonextensible,
+      oleautomation,
+      helpstring("CodeHelp Plugin Object")
+    ]
+    interface ICHPlugin : IDispatch {
+        [id(0x68030008), propget]
+        HRESULT Name([out, retval] BSTR* );
+        [id(0x68030007), propget]
+        HRESULT LongName([out, retval] BSTR* );
+        [id(0x68030006), propget]
+        HRESULT Version([out, retval] BSTR* );
+        [id(0x68030005), propget]
+        HRESULT Description([out, retval] BSTR* );
+        [id(0x68030004), propget]
+        HRESULT CopyRight([out, retval] BSTR* );
+        [id(0x60030009)]
+        HRESULT OnConnection(
+                        [in] ext_ConnectMode ConnectMode, 
+                        [in, out] SAFEARRAY(VARIANT)* custom);
+        [id(0x6003000a)]
+        HRESULT OnDisconnect(
+                        [in] ext_DisconnectMode RemoveMode, 
+                        [in, out] SAFEARRAY(VARIANT)* custom);
+        [id(0x6003000b)]
+        HRESULT OnWinProcHook(
+                        [in] long hWnd, 
+                        [in] long uMsg, 
+                        [in] long wParam, 
+                        [in] long lParam, 
+                        [in, out] VARIANT_BOOL* bHandled, 
+                        [in, out] VARIANT_BOOL* placeSubclass, 
+                        [in, out] VARIANT_BOOL* before);
+        [id(0x6003000c)]
+        HRESULT OnWinProc(
+                        [in] long hWnd, 
+                        [in] long uMsg, 
+                        [in, out] long* wParam, 
+                        [in, out] long* lParam, 
+                        [in, out] VARIANT_BOOL* bHandled, 
+                        [in, out] long* lreturn);
+        [id(0x6003000d)]
+        HRESULT OnKeyHook(
+                        [in, out] VARIANT_BOOL* bHandled, 
+                        [in, out] long* lreturn, 
+                        [in, out] long* wParam, 
+                        [in, out] long* lParam);
+        [id(0x68030003), propput]
+        HRESULT CHCore([in] long rhs);
+        [id(0x68030002), propget]
+        HRESULT Enabled([out, retval] VARIANT_BOOL* );
+        [id(0x68030002), propput]
+        HRESULT Enabled([in] VARIANT_BOOL );
+        [id(0x68030001), propget]
+        HRESULT HaveProperties([out, retval] VARIANT_BOOL* );
+        [id(0x6003000e)]
+        HRESULT ShowPropertyDialog();
+        [id(0x68030000), propget]
+        HRESULT HaveExtendedHelp([out, retval] VARIANT_BOOL* );
+        [id(0x6003000f)]
+        HRESULT ShowHelp();
+    };
+
+};
